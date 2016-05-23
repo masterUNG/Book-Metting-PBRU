@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Book Meeting PBRU</string>
+
+    <string name="singup">สมัครสมาชิค</string>
+    <string name="name">ชื่อ</string>
+    <string name="surname">นามสกุล</string>
+    <string name="idcard">รหัสบัตรบัตร</string>
+    <string name="office">บุคลากรภายใน</string>
+    <string name="outoffice">บุคลากรภายนอก</string>
+
+
 </resources>
