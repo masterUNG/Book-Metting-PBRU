@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:text="@string/singup"
         android:id="@+id/button3"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:onClick="clickSignUpSign" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -104,14 +105,16 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editText3"
                     android:layout_weight="1"
-                    android:textColor="@color/text" />
+                    android:textColor="@color/text"
+                    android:inputType="number" />
             </LinearLayout>
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/ragOffice">
 
                 <RadioButton
                     android:layout_width="wrap_content"
