@@ -26,8 +26,20 @@ public class SingUpActivity extends AppCompatActivity {
         //Bind Widget
         bindWidget();
 
+        //Radio Controller
+        radioController();
+
 
     }   // Main Method
+
+    private void radioController() {
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+            }
+        });
+    }
 
     private void bindWidget() {
         nameEditText = (EditText) findViewById(R.id.editText);
@@ -58,11 +70,30 @@ public class SingUpActivity extends AppCompatActivity {
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this, "รหัสบัตรประชาชนผิด",
                     "รหัสบัตรประชาชน ต้องมี 13 หลักเท่านั้น");
+        } else if (checkRadioChoose()) {
+            //Non Check
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "ยังไม่เลือกสถานะ",
+                    "โปรดเลือกสถานะด้วย คะ");
+
+        } else {
+
+           // uploadValuetoServer();
+
         }
 
 
 
     }   // clickSign
+
+    private boolean checkRadioChoose() {
+
+        boolean result = true;
+
+        result = officeRadioButton.isChecked() || outOfficeRadioButton.isChecked();
+
+        return !result;
+    }
 
     private boolean checkSpace() {
 
