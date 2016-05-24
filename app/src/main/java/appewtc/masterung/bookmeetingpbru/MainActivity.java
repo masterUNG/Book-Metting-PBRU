@@ -12,6 +12,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     //Explicit
@@ -65,6 +68,29 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d("pbruV1", "strJSON ==> " + s);
+
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+
+                for (int i=0;i<jsonArray.length();i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String strName = jsonObject.getString(MyManage.column_Name);
+                    String strSurname = jsonObject.getString(MyManage.column_Surname);
+                    String strIDcard = jsonObject.getString(MyManage.column_IDcard);
+                    String strOffice = jsonObject.getString(MyManage.column_Office);
+                    String strUser = jsonObject.getString(MyManage.column_User);
+                    String strPassword = jsonObject.getString(MyManage.column_Password);
+                    myManage.addUser(strName, strSurname, strIDcard,
+                            strOffice, strUser, strPassword);
+
+                }   // for
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
 
         }   // onPost
     }   // SynUser Class
