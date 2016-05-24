@@ -7,10 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,11 +23,23 @@ public class MainActivity extends AppCompatActivity {
     //Explicit
     private MyManage myManage;
     private String strURL = "http://swiftcodingthai.com/pbru/get_user.php";
+    private String strLogo = "http://swiftcodingthai.com/pbru/Image/logo_pbru.png";
+    private ImageView imageView;
+    private EditText userEditText, passwordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Bind Widget
+        imageView = (ImageView) findViewById(R.id.imageView);
+        userEditText = (EditText) findViewById(R.id.editText6);
+        passwordEditText = (EditText) findViewById(R.id.editText7);
+
+        //Show logo
+        Picasso.with(this).load(strLogo).into(imageView);
+
 
         myManage = new MyManage(this);
 
