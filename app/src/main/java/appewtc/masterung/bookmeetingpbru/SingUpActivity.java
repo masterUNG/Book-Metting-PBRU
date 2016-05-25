@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -100,11 +101,11 @@ public class SingUpActivity extends AppCompatActivity {
             myAlert.myDialog(this, "ยังไม่เลือกสถานะ",
                     "โปรดเลือกสถานะด้วย คะ");
 
-        } else if (checkUser(userString)) {
+        } else if (checkUser()) {
             //Have This User
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this, "มี User นี่แล้ว", "กรุณาเปลี่ยน User ใหม่ มีคนใช้ไปแล้ว");
-        } else if (chekcIDcard(idCardString)) {
+        } else if (chekcIDcard()) {
             //Have Thid idCard
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this, "มี IDcard นี่แล้ว", "กรุณาเปลี่ยน IDcard ใหม่ มีคนใช้ไปแล้ว");
@@ -114,13 +115,16 @@ public class SingUpActivity extends AppCompatActivity {
 
     }   // clickSign
 
-    private boolean chekcIDcard(String idCardString) {
+    private boolean chekcIDcard() {
         try {
 
             SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
                     MODE_PRIVATE, null);
             Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM userTABLE WHERE IDcard = " + "'" + idCardString + "'", null);
             cursor.moveToFirst();
+
+            Log.d("25May", "ID ==> " + idCardString);
+            Log.d("25May", "ID get ==> " + cursor.getString(3));
 
             return true;
 
@@ -129,7 +133,7 @@ public class SingUpActivity extends AppCompatActivity {
         }
     }
 
-    private boolean checkUser(String userString) {
+    private boolean checkUser() {
 
         try {
 
@@ -137,6 +141,9 @@ public class SingUpActivity extends AppCompatActivity {
                     MODE_PRIVATE, null);
             Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM userTABLE WHERE User = " + "'" + userString + "'", null);
             cursor.moveToFirst();
+
+            Log.d("25May", "user ==> " + userString);
+            Log.d("25May", "user get ==> " + cursor.getString(5));
 
             return true;
 
