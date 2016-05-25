@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,7 +22,9 @@ public class ServiceActivity extends AppCompatActivity {
     private ListView listView;
     private String urlJSON = "http://swiftcodingthai.com/pbru/get_service.php";
     private String[] nameRoomStrings, nameBuildStrings, sizeStrings,
-            priceDayStrings, priceHoliStrings, iconStrings, userLoginStrings;
+            priceDayStrings, priceHoliStrings, iconStrings, userLoginStrings,
+            image2Strings, image3Strings, image4Strings, image5Strings;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +79,10 @@ public class ServiceActivity extends AppCompatActivity {
                 priceDayStrings = new String[jsonArray.length()];
                 priceHoliStrings = new String[jsonArray.length()];
                 iconStrings = new String[jsonArray.length()];
+                image2Strings = new String[jsonArray.length()];
+                image3Strings = new String[jsonArray.length()];
+                image4Strings = new String[jsonArray.length()];
+                image5Strings = new String[jsonArray.length()];
 
                 for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -86,6 +94,10 @@ public class ServiceActivity extends AppCompatActivity {
                     priceDayStrings[i] = jsonObject.getString("PriceDay");
                     priceHoliStrings[i] = jsonObject.getString("PriceHoliday");
                     iconStrings[i] = jsonObject.getString("Image1");
+                    image2Strings[i] = jsonObject.getString("Image2");
+                    image3Strings[i] = jsonObject.getString("Image3");
+                    image4Strings[i] = jsonObject.getString("Image4");
+                    image5Strings[i] = jsonObject.getString("Image5");
 
                 }   // for
 
@@ -93,6 +105,13 @@ public class ServiceActivity extends AppCompatActivity {
                         nameRoomStrings, nameBuildStrings, sizeStrings,
                         priceDayStrings, priceHoliStrings, iconStrings);
                 listView.setAdapter(myAdapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+                });
 
 
             } catch (Exception e) {
