@@ -1,5 +1,6 @@
 package appewtc.masterung.bookmeetingpbru;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -110,7 +111,23 @@ public class ServiceActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    }
+                        Intent intent = new Intent(ServiceActivity.this, DetailActivity.class);
+
+                        intent.putExtra("NameBuild", nameBuildStrings[i]);
+                        intent.putExtra("NameRoom", nameRoomStrings[i]);
+                        intent.putExtra("Size", sizeStrings[i]);
+                        intent.putExtra("PriceDay", priceDayStrings[i]);
+                        intent.putExtra("PriceHoliday", priceHoliStrings[i]);
+                        intent.putExtra("Image1", iconStrings[i]);
+                        intent.putExtra("Image2", image2Strings[i]);
+                        intent.putExtra("Image3", image3Strings[i]);
+                        intent.putExtra("Image4", image4Strings[i]);
+                        intent.putExtra("Image5", image5Strings[i]);
+
+                        intent.putExtra("User", userLoginStrings);
+                        startActivity(intent);
+
+                    }   // onItemClick
                 });
 
 
