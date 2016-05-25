@@ -22,14 +22,16 @@
             android:layout_height="wrap_content"
             android:text="Back"
             android:id="@+id/button4"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickBack" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Order"
             android:id="@+id/button5"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickOrder" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,7 +74,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/imageView4"
                 android:layout_weight="1"
-                android:src="@drawable/blue" />
+                android:src="@drawable/blue"
+                android:onClick="clickDecrease" />
 
             <ImageView
                 android:layout_width="0dp"
@@ -80,7 +83,8 @@
                 android:id="@+id/imageView5"
                 android:layout_weight="1"
                 android:src="@drawable/orange"
-                android:layout_marginLeft="15dp" />
+                android:layout_marginLeft="15dp"
+                android:onClick="clickIncrease" />
         </LinearLayout>
 
         <TextView

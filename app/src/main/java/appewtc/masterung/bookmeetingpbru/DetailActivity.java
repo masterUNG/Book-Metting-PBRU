@@ -2,8 +2,11 @@ package appewtc.masterung.bookmeetingpbru;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -13,6 +16,7 @@ public class DetailActivity extends AppCompatActivity {
     private String nameRoomString, nameBuildString, sizeString,
             priceDayString, priceHoliString,
             image1String, image2String, image3String, image4String, image5String;
+    private int myImage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,70 @@ public class DetailActivity extends AppCompatActivity {
 
         showTextView();
 
+        showImage(1);
+
 
     }   // Main Method
+
+    public void clickBack(View view) {
+        finish();
+    }
+
+    public void clickOrder(View view) {
+
+    }
+
+    public void clickIncrease(View view) {
+
+        if (myImage == 5) {
+            myImage = 1;
+        } else {
+            myImage += 1;
+        }
+
+        showImage(myImage);
+
+    }
+
+    public void clickDecrease(View view) {
+
+        if (myImage == 1) {
+            myImage = 5;
+        } else {
+            myImage -= 1;
+        }
+
+        showImage(myImage);
+
+    }
+
+
+
+    private void showImage(int intImage) {
+
+        String urlImage = image1String;
+
+        switch (intImage) {
+            case 1:
+                urlImage = image1String;
+                break;
+            case 2:
+                urlImage = image2String;
+                break;
+            case 3:
+                urlImage = image3String;
+                break;
+            case 4:
+                urlImage = image4String;
+                break;
+            case 5:
+                urlImage = image5String;
+                break;
+        }   // switch
+
+        Picasso.with(this).load(urlImage).resize(250,200).into(imageView);
+
+    }
 
     private void showTextView() {
         nameRoomTextView.setText(nameRoomString);
