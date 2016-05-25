@@ -20,16 +20,20 @@ public class ServiceActivity extends AppCompatActivity {
     private ListView listView;
     private String urlJSON = "http://swiftcodingthai.com/pbru/get_service.php";
     private String[] nameRoomStrings, nameBuildStrings, sizeStrings,
-            priceDayStrings, priceHoliStrings, iconStrings;
+            priceDayStrings, priceHoliStrings, iconStrings, userLoginStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
 
+        userLoginStrings = getIntent().getStringArrayExtra("User");
+
         //Bind Widget
         textView = (TextView) findViewById(R.id.textView7);
         listView = (ListView) findViewById(R.id.listView);
+
+        textView.setText("Welcome ==> " + userLoginStrings[1] + " " + userLoginStrings[2]);
 
         SynService synService = new SynService();
         synService.execute();
