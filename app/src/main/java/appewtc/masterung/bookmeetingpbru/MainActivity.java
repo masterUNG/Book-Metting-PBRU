@@ -56,6 +56,13 @@ public class MainActivity extends AppCompatActivity {
 
     }   // Main Method
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        deleteAllSQLite();
+        synJSON();
+    }
+
     public void clickSignIn(View view) {
 
         userString = userEditText.getText().toString().trim();
@@ -94,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
                 intent.putExtra("User", userLoginStrings);
                 startActivity(intent);
-                finish();
+               finish();
 
             } else {
                 //Password False
