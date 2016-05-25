@@ -1,6 +1,7 @@
 package appewtc.masterung.bookmeetingpbru;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private EditText userEditText, passwordEditText;
     private String userString, passwordString;
+    private String[] userLoginStrings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,32 @@ public class MainActivity extends AppCompatActivity {
     private void searchUser(String userString) {
 
         try {
+
+            SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
+                    MODE_PRIVATE, null);
+            Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM userTABLE WHERE User = " + "'" + userString + "'", null);
+            cursor.moveToFirst();
+            userLoginStrings = new String[cursor.getColumnCount()];
+            for (int i=0;i<cursor.getColumnCount();i++) {
+                userLoginStrings[i] = cursor.getString(i);
+            }   // for
+            cursor.close();
+
+            //Check Password
+            if (passwordString.equals(userLoginStrings[6])) {
+                //Password True
+                Intent intent = new Intent(MainActivity.this, ServiceActivity.class);
+                intent.putExtra("User", userLoginStrings);
+                startActivity(intent);
+                finish();
+
+            } else {
+                //Password False
+                MyAlert myAlert = new MyAlert();
+                myAlert.myDialog(this, "Password False", "Please Try Again Password False");
+
+            }
+
 
         } catch (Exception e) {
             MyAlert myAlert = new MyAlert();
