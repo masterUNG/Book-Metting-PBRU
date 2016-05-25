@@ -23,9 +23,10 @@ public class MainActivity extends AppCompatActivity {
     //Explicit
     private MyManage myManage;
     private String strURL = "http://swiftcodingthai.com/pbru/get_user.php";
-    private String strLogo = "http://swiftcodingthai.com/pbru/Image/logo_pbru.png";
+    private String strLogo = "http://swiftcodingthai.com/pbru/Image/logo_pbru1.png";
     private ImageView imageView;
     private EditText userEditText, passwordEditText;
+    private String userString, passwordString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,35 @@ public class MainActivity extends AppCompatActivity {
         synJSON();
 
     }   // Main Method
+
+    public void clickSignIn(View view) {
+
+        userString = userEditText.getText().toString().trim();
+        passwordString = passwordEditText.getText().toString().trim();
+
+        //Check Space
+        if (userString.equals("") || passwordString.equals("")) {
+            //Have Space
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "มีช่องว่าง", "กรุณากรอกทุกช่อง คะ");
+
+        } else {
+            //No Space
+            searchUser(userString);
+        }
+
+    }   // clickSignIn
+
+    private void searchUser(String userString) {
+
+        try {
+
+        } catch (Exception e) {
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "ไม่มี User นี่้", "ไม่มี " + userString + " ในฐานข้อมูลของเรา");
+        }
+
+    }   // searchUser
 
     private void synJSON() {
         SynUser synUser = new SynUser();
