@@ -1,5 +1,7 @@
 package appewtc.masterung.bookmeetingpbru;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -98,13 +100,51 @@ public class SingUpActivity extends AppCompatActivity {
             myAlert.myDialog(this, "ยังไม่เลือกสถานะ",
                     "โปรดเลือกสถานะด้วย คะ");
 
+        } else if (checkUser(userString)) {
+            //Have This User
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "มี User นี่แล้ว", "กรุณาเปลี่ยน User ใหม่ มีคนใช้ไปแล้ว");
+        } else if (chekcIDcard(idCardString)) {
+            //Have Thid idCard
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "มี IDcard นี่แล้ว", "กรุณาเปลี่ยน IDcard ใหม่ มีคนใช้ไปแล้ว");
         } else {
-
-           uploadValuetoServer();
-
+            uploadValuetoServer();
         }
 
     }   // clickSign
+
+    private boolean chekcIDcard(String idCardString) {
+        try {
+
+            SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
+                    MODE_PRIVATE, null);
+            Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM userTABLE WHERE IDcard = " + "'" + idCardString + "'", null);
+            cursor.moveToFirst();
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean checkUser(String userString) {
+
+        try {
+
+            SQLiteDatabase sqLiteDatabase = openOrCreateDatabase(MyOpenHelper.database_name,
+                    MODE_PRIVATE, null);
+            Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM userTABLE WHERE User = " + "'" + userString + "'", null);
+            cursor.moveToFirst();
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
 
     private void uploadValuetoServer() {
 
