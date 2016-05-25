@@ -63,13 +63,13 @@ public class MyAdapter extends BaseAdapter {
         nameBuildTextView.setText(nameBuildStrings[i]);
 
         TextView sizeTextView = (TextView) view1.findViewById(R.id.textView10);
-        sizeTextView.setText(sizeStrings[i]);
+        sizeTextView.setText( "จุคนได้ " + sizeStrings[i]);
 
         TextView priceDayTextView = (TextView) view1.findViewById(R.id.textView11);
-        priceDayTextView.setText(priceDayStrings[i]);
+        priceDayTextView.setText("วันธรรมดา " + priceDayStrings[i]);
 
         TextView priceHoliTextView = (TextView) view1.findViewById(R.id.textView12);
-        priceHoliTextView.setText(priceHolidayStrings[i]);
+        priceHoliTextView.setText("วันหยุด " + priceHolidayStrings[i]);
 
         ImageView imageView = (ImageView) view1.findViewById(R.id.imageView2);
         Picasso.with(context).load(iconStrings[i]).resize(120, 100).into(imageView);
