@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by masterUNG on 5/25/16 AD.
@@ -68,6 +71,8 @@ public class MyAdapter extends BaseAdapter {
         TextView priceHoliTextView = (TextView) view1.findViewById(R.id.textView12);
         priceHoliTextView.setText(priceHolidayStrings[i]);
 
+        ImageView imageView = (ImageView) view1.findViewById(R.id.imageView2);
+        Picasso.with(context).load(iconStrings[i]).resize(120, 100).into(imageView);
 
         return view1;
     }

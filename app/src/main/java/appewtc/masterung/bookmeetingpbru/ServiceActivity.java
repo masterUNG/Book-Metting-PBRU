@@ -11,6 +11,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class ServiceActivity extends AppCompatActivity {
 
     private TextView textView;
@@ -58,8 +61,42 @@ public class ServiceActivity extends AppCompatActivity {
 
             Log.d("pbruV2", "JSON ==> " + s);
 
+            try {
 
-        }
+                JSONArray jsonArray = new JSONArray(s);
+
+                nameRoomStrings = new String[jsonArray.length()];
+                nameBuildStrings = new String[jsonArray.length()];
+                sizeStrings = new String[jsonArray.length()];
+                priceDayStrings = new String[jsonArray.length()];
+                priceHoliStrings = new String[jsonArray.length()];
+                iconStrings = new String[jsonArray.length()];
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    nameRoomStrings[i] = jsonObject.getString("NameRoom");
+                    nameBuildStrings[i] = jsonObject.getString("NameBuild");
+                    sizeStrings[i] = jsonObject.getString("Size");
+                    priceDayStrings[i] = jsonObject.getString("PriceDay");
+                    priceHoliStrings[i] = jsonObject.getString("PriceHoliday");
+                    iconStrings[i] = jsonObject.getString("Image1");
+
+                }   // for
+
+                MyAdapter myAdapter = new MyAdapter(ServiceActivity.this,
+                        nameRoomStrings, nameBuildStrings, sizeStrings,
+                        priceDayStrings, priceHoliStrings, iconStrings);
+                listView.setAdapter(myAdapter);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }   // onPost
     }   // SynService Class
 
 }   // Main Class
