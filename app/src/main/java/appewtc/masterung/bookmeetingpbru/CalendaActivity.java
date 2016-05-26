@@ -1,5 +1,7 @@
 package appewtc.masterung.bookmeetingpbru;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -72,6 +74,8 @@ public class CalendaActivity extends AppCompatActivity {
                 monthAnInt = month;
                 yearAnInt = year;
 
+
+
             }
         });
 
@@ -131,7 +135,51 @@ public class CalendaActivity extends AppCompatActivity {
 
     private void updateToServer() {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.icon_myaccount);
+        builder.setCancelable(false);
+        builder.setTitle("โปรดตรวจสอบข้อมูล");
+        builder.setMessage("ชื่อผู้จอง = " + userLoginStrings[1] + " " + userLoginStrings[2] + "\n" +
+        "รหัสบัตรประชาชน = " + idCardString + "\n" +
+        "ห้องที่จอง = " + nameRoomString + "\n" +
+        "วันเข้าใช้ = " + "test" + "\n" +
+        "จำนวนวันที่ใช้ = " + Integer.toString(loopDayAnInt) + "\n" +
+        "เวลาที่เข้าใช้ = " + showTime(timeString));
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+
+
     }   // updateToServer
+
+    private String showTime(String timeString) {
+
+        int intTime = Integer.parseInt(timeString);
+        String strResult= "8:00-12:00";;
+        switch (intTime) {
+            case 0:
+                strResult = "8:00-12:00";
+                break;
+            case 1:
+                strResult = "13:00-16:30";
+                break;
+            case 2:
+                strResult = "8:00-16:30";
+                break;
+        }
+
+        return strResult;
+    }
 
     private boolean checkRadioButton() {
 
