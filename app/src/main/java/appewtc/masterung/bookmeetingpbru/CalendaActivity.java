@@ -94,8 +94,6 @@ public class CalendaActivity extends AppCompatActivity {
                 Log.d("pbruV4", "Month = " + (month+1));
                 Log.d("pbruV4", "Year = " + year);
 
-
-
                 if (year < yearAnInt) {
                     alertErrorDay();
                 } else {
@@ -110,14 +108,14 @@ public class CalendaActivity extends AppCompatActivity {
                                 alertErrorDay();
                             } else {
                                 dayAnInt = day;
-                                monthAnInt = month;
+                                monthAnInt = month +1;
                                 yearAnInt = year;
                             }
 
                         } else {
 
                             dayAnInt = day;
-                            monthAnInt = month;
+                            monthAnInt = month +1;
                             yearAnInt = year;
 
                         }
