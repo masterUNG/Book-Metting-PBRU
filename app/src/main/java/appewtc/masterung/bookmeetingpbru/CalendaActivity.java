@@ -13,6 +13,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 import java.util.Calendar;
 
 public class CalendaActivity extends AppCompatActivity {
@@ -195,7 +204,7 @@ public class CalendaActivity extends AppCompatActivity {
         builder.setMessage("ชื่อผู้จอง = " + userLoginStrings[1] + " " + userLoginStrings[2] + "\n" +
         "รหัสบัตรประชาชน = " + idCardString + "\n" +
         "ห้องที่จอง = " + nameRoomString + "\n" +
-        "วันเข้าใช้ = " + createDate() + "\n" +
+        "วันเข้าใช้ = " + createDate(dayAnInt) + "\n" +
         "จำนวนวันที่ใช้ = " + Integer.toString(loopDayAnInt) + "\n" +
         "เวลาที่เข้าใช้ = " + showTime(timeString));
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -207,6 +216,9 @@ public class CalendaActivity extends AppCompatActivity {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+                updateOrderTABLE();
+
                 dialogInterface.dismiss();
             }
         });
@@ -215,11 +227,48 @@ public class CalendaActivity extends AppCompatActivity {
 
     }   // updateToServer
 
-    private String createDate() {
+    private void updateOrderTABLE() {
+
+        String strURL = "http://swiftcodingthai.com/pbru/add_order.php";
+        int intDay = dayAnInt;
+
+        for (int i=0;i<loopDayAnInt;i++) {
+
+            intDay = intDay + i;
+
+            OkHttpClient okHttpClient = new OkHttpClient();
+            RequestBody requestBody = new FormEncodingBuilder()
+                    .add("isAdd", "true")
+                    .add("IDcard", idCardString)
+                    .add("NameRoom", nameRoomString)
+                    .add("Date", createDate(intDay))
+                    .add("Time", timeString)
+                    .build();
+            Request.Builder builder = new Request.Builder();
+            Request request = builder.url(strURL).post(requestBody).build();
+            Call call = okHttpClient.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                        finish();
+                }
+            });
+
+
+        }   // for
+
+    }   // updateOrder
+
+    private String createDate(int intDay) {
 
         String strResult = null;
 
-        strResult = Integer.toString(dayAnInt) + "/" +
+        strResult = Integer.toString(intDay) + "/" +
                 Integer.toString(monthAnInt) + "/" +
                 Integer.toString(yearAnInt);
 
