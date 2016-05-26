@@ -16,6 +16,9 @@ public class CalendaActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton beforeNoonRadioButton, afterNoonRadioButton,
             fullDayRadioButton;
+    private String idCardString, nameRoomString, dateString, timeString;
+    private String[] userLoginStrings;
+    private int dayAnInt, monthAnInt, yearAnInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +27,37 @@ public class CalendaActivity extends AppCompatActivity {
 
         bindWidget();
 
+        getValue();
+
         createSpinner();
+
+        calendarController();
 
 
     }   // Main Method
+
+    private void calendarController() {
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
+
+                dayAnInt = day;
+                monthAnInt = month;
+                yearAnInt = year;
+
+            }
+        });
+
+    }   // calendar
+
+    private void getValue() {
+
+        userLoginStrings = getIntent().getStringArrayExtra("User");
+        idCardString = userLoginStrings[3];
+        nameRoomString = getIntent().getStringExtra("NameRoom");
+
+    }
 
     private void createSpinner() {
 
