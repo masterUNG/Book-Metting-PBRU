@@ -191,7 +191,7 @@ public class CalendaActivity extends AppCompatActivity {
                         }
 
                     }
-                }
+                }   // if year
 
 
             }    //onSelectDay
