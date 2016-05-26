@@ -14,5 +14,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/calendarView"
-        android:background="#82ffffff" />
+        android:background="#82ffffff"
+        android:layout_above="@+id/linBottonCal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linBottonCal"
+        android:background="#82ffffff"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text1"
+            android:id="@+id/textView18"
+            android:textSize="@dimen/h2" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text2"
+            android:id="@+id/textView19"
+            android:textSize="@dimen/h2" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ragTime"
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/beforenoon"
+                android:id="@+id/radioButton3" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/afternoon"
+                android:id="@+id/radioButton4" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fullday"
+                android:id="@+id/radioButton5" />
+        </RadioGroup>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order"
+            android:id="@+id/button6" />
+    </LinearLayout>
 </RelativeLayout>
