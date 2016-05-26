@@ -167,30 +167,42 @@ public class CalendaActivity extends AppCompatActivity {
                 if (year < yearAnInt) {
                     alertErrorDay();
                 } else {
-                    if ((month+1) < monthAnInt) {
-                        alertErrorDay();
 
-                    } else {
+                    if (year == yearAnInt) {
 
-                        if ((month + 1) == monthAnInt) {
-
-                            if ((day <= dayAnInt)) {
-                                alertErrorDay();
-                            } else {
-                                dayAnInt = day;
-                                monthAnInt = month +1;
-                                yearAnInt = year;
-                            }
+                        if ((month+1) < monthAnInt) {
+                            alertErrorDay();
 
                         } else {
 
-                            dayAnInt = day;
-                            monthAnInt = month +1;
-                            yearAnInt = year;
+                            if ((month + 1) == monthAnInt) {
+
+                                if ((day <= dayAnInt)) {
+                                    alertErrorDay();
+                                } else {
+                                    dayAnInt = day;
+                                    monthAnInt = month +1;
+                                    yearAnInt = year;
+                                }
+
+                            } else {
+
+                                dayAnInt = day;
+                                monthAnInt = month +1;
+                                yearAnInt = year;
+
+                            }
 
                         }
 
+                    } else {
+
+                        dayAnInt = day;
+                        monthAnInt = month +1;
+                        yearAnInt = year;
+
                     }
+
                 }   // if year
 
 
