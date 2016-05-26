@@ -234,7 +234,7 @@ public class CalendaActivity extends AppCompatActivity {
 
         for (int i=0;i<loopDayAnInt;i++) {
 
-            intDay = intDay + i;
+            intDay = dayAnInt + i;
 
             OkHttpClient okHttpClient = new OkHttpClient();
             RequestBody requestBody = new FormEncodingBuilder()
