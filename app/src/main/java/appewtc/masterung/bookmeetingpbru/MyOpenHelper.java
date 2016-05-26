@@ -21,6 +21,13 @@ public class MyOpenHelper extends SQLiteOpenHelper{
             "User text," +
             "Password text);";
 
+    private static final String create_order_table = "create table orderTABLE (" +
+            "_id integer primary key," +
+            "IDcard text," +
+            "NameRoom text," +
+            "Date text," +
+            "Time text);";
+
     public MyOpenHelper(Context context) {
         super(context, database_name, null,database_version);
     }
@@ -28,6 +35,7 @@ public class MyOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(create_user_table);
+        sqLiteDatabase.execSQL(create_order_table);
     }
 
     @Override

@@ -22,6 +22,11 @@ public class MyManage {
     public static final String column_User = "User";
     public static final String column_Password = "Password";
 
+    public static final String order_table = "orderTABLE";
+    public static final String column_nameRoom = "NameRoom";
+    public static final String column_date = "Date";
+    public static final String column_time = "Time";
+
     public MyManage(Context context) {
 
         myOpenHelper = new MyOpenHelper(context);
