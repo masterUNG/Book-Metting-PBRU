@@ -34,6 +34,20 @@ public class MyManage {
 
     }   // Constructor
 
+    public long addOrder(String strIDcard,
+                         String strNameRoom,
+                         String strDate,
+                         String strTime) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column_IDcard, strIDcard);
+        contentValues.put(column_nameRoom, strNameRoom);
+        contentValues.put(column_date, strDate);
+        contentValues.put(column_time, strTime);
+
+        return sqLiteDatabase.insert(order_table, null, contentValues);
+    }
+
     public long addUser(String strName,
                         String strSurname,
                         String strIDcard,
