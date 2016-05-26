@@ -3,6 +3,7 @@ package appewtc.masterung.bookmeetingpbru;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.RadioButton;
@@ -18,7 +19,7 @@ public class CalendaActivity extends AppCompatActivity {
             fullDayRadioButton;
     private String idCardString, nameRoomString, dateString, timeString;
     private String[] userLoginStrings;
-    private int dayAnInt, monthAnInt, yearAnInt;
+    private int dayAnInt, monthAnInt, yearAnInt, loopDayAnInt = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,33 @@ public class CalendaActivity extends AppCompatActivity {
 
         calendarController();
 
+        radioController();
+
 
     }   // Main Method
+
+    private void radioController() {
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                switch (i) {
+                    case R.id.radioButton3:
+                        timeString = "0";
+                        break;
+                    case R.id.radioButton4:
+                        timeString = "1";
+                        break;
+                    case R.id.radioButton5:
+                        timeString = "2";
+                        break;
+                }
+
+            }
+        });
+
+    }   // radioController
 
     private void calendarController() {
 
@@ -67,6 +93,18 @@ public class CalendaActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, strAmount);
         spinner.setAdapter(stringArrayAdapter);
 
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                loopDayAnInt = i + 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                loopDayAnInt = 1;
+            }
+        });
+
 
     }   // createSpinner
 
@@ -81,7 +119,30 @@ public class CalendaActivity extends AppCompatActivity {
 
     public void clickOrderCalendar(View view) {
 
+        if (checkRadioButton()) {
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "ยังไม่เลื่อกเวลา", "โปรดเลือกเวลา");
+        } else {
+            updateToServer();
+        }
+
 
     }   // clickOrder
+
+    private void updateToServer() {
+
+    }   // updateToServer
+
+    private boolean checkRadioButton() {
+
+        if (beforeNoonRadioButton.isChecked() ||
+                afterNoonRadioButton.isChecked() ||
+                fullDayRadioButton.isChecked()) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
 
 }   // Main Class
