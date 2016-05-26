@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,6 +12,8 @@ import android.widget.CalendarView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+
+import java.util.Calendar;
 
 public class CalendaActivity extends AppCompatActivity {
 
@@ -34,12 +37,23 @@ public class CalendaActivity extends AppCompatActivity {
 
         createSpinner();
 
+        setupDate();
+
         calendarController();
 
         radioController();
 
 
     }   // Main Method
+
+    private void setupDate() {
+
+        Calendar calendar = Calendar.getInstance();
+        dayAnInt = calendar.get(Calendar.DAY_OF_MONTH);
+        monthAnInt = calendar.get(Calendar.MONTH) + 1;
+        yearAnInt = calendar.get(Calendar.YEAR);
+
+    }
 
     private void radioController() {
 
@@ -70,16 +84,57 @@ public class CalendaActivity extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
 
-                dayAnInt = day;
-                monthAnInt = month;
-                yearAnInt = year;
+                setupDate();
+
+                Log.d("pbruV4", "curentDay = " + dayAnInt);
+                Log.d("pbruV4", "curentMonth = " + monthAnInt);
+                Log.d("pbruV4", "curentYear = " + yearAnInt);
+
+                Log.d("pbruV4", "Day = " + day);
+                Log.d("pbruV4", "Month = " + (month+1));
+                Log.d("pbruV4", "Year = " + year);
 
 
 
-            }
+                if (year < yearAnInt) {
+                    alertErrorDay();
+                } else {
+                    if ((month+1) < monthAnInt) {
+                        alertErrorDay();
+
+                    } else {
+
+                        if ((month + 1) == monthAnInt) {
+
+                            if ((day <= dayAnInt)) {
+                                alertErrorDay();
+                            } else {
+                                dayAnInt = day;
+                                monthAnInt = month;
+                                yearAnInt = year;
+                            }
+
+                        } else {
+
+                            dayAnInt = day;
+                            monthAnInt = month;
+                            yearAnInt = year;
+
+                        }
+
+                    }
+                }
+
+
+            }    //onSelectDay
         });
 
     }   // calendar
+
+    private void alertErrorDay() {
+        MyAlert myAlert = new MyAlert();
+        myAlert.myDialog(CalendaActivity.this, "ห้ามย้อนเวลา", "เลือกวันใหม่");
+    }
 
     private void getValue() {
 
@@ -142,7 +197,7 @@ public class CalendaActivity extends AppCompatActivity {
         builder.setMessage("ชื่อผู้จอง = " + userLoginStrings[1] + " " + userLoginStrings[2] + "\n" +
         "รหัสบัตรประชาชน = " + idCardString + "\n" +
         "ห้องที่จอง = " + nameRoomString + "\n" +
-        "วันเข้าใช้ = " + "test" + "\n" +
+        "วันเข้าใช้ = " + createDate() + "\n" +
         "จำนวนวันที่ใช้ = " + Integer.toString(loopDayAnInt) + "\n" +
         "เวลาที่เข้าใช้ = " + showTime(timeString));
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -161,6 +216,17 @@ public class CalendaActivity extends AppCompatActivity {
 
 
     }   // updateToServer
+
+    private String createDate() {
+
+        String strResult = null;
+
+        strResult = Integer.toString(dayAnInt) + "/" +
+                Integer.toString(monthAnInt) + "/" +
+                Integer.toString(yearAnInt);
+
+        return strResult;
+    }
 
     private String showTime(String timeString) {
 
